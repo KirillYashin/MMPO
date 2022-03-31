@@ -20,22 +20,28 @@ juniorDelta = 0.000016
 adultGamma = 0.004
 juniorGamma = 0.00008
 
+
 # Функции окружиющей среды
 def foodDistribution(arg):
     return firstSigma * (arg + maximumDepth) # -maximumDepth < arg < 0
 
+
 def predatorDistribution(arg):
     return secondSigma * (arg + maximumDepth) # -maximumDepth < arg < 0
+
 
 def predatorActivity(argT):
     return math.cos(2*math.pi*argT) + 1 # 0 < arg < 1
 
+
 def additionalMortality(arg):
     return (arg + minimumDepth)**2
+
 
 # Функция стратегии поведения
 def behaviorStrategy(argA, argB, argT):
     return argA + argB * math.cos(2*math.pi*argT)
+
 
 # Функция генерации А(глубина) и В(амплитуда погружения)
 def randomArgs():
@@ -43,18 +49,23 @@ def randomArgs():
     b = random.uniform((-maximumDepth + 1) / 2, -1)
     return a,b
 
+
 # Функции макропараметров
 def macroparameterM1(argA):
     return firstSigma * (argA + maximumDepth)
 
+
 def macroparameterM2(argA, argB):
     return -secondSigma * (argA + maximumDepth + argB/2)
+
 
 def macroparameterM3(argB):
     return -2*math.pi**2 * argB**2
 
+
 def macroparameterM4(argA, argB):
     return -(argA + minimumDepth)**2 - argB**2/2
+
 
 # Функция фитнеса
 def fitness(argA1, argB1, argA2, argB2):

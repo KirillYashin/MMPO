@@ -151,13 +151,10 @@ def do_lda_classification():
 
     cm = confusion_matrix(y_test, y_pred)
     if 2 > globalF > 0:
-        # print(globalF)
-        # print(coefs)
-        # print(cm)
-        # print('Accuracy' + str(accuracy_score(y_test, y_pred)))
-        return coefs, str(accuracy_score(y_test, y_pred))
-    else:
-        return 0, 0
+        print(globalF)
+        print(coefs)
+        print(cm)
+        print('Accuracy' + str(accuracy_score(y_test, y_pred)))
 
 
 def do_svm_classification():
@@ -180,11 +177,6 @@ def do_svm_classification():
     print("Accuracy: " + str(accuracy_lin))
 
 
-coefs, accuracy = [], []
 
 for i in range(1000):
-    t1, t2 = do_lda_classification()
-    print(f'Returned - {t1, t2}')
-    coefs.append(t1)
-    accuracy.append(t2)
-print(f'MAX - {max(accuracy)}')
+    do_lda_classification()

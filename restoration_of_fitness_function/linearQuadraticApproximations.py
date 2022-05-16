@@ -75,7 +75,7 @@ def fitness(argA1, argB1, argA2, argB2):
     r = adultAlpha * macroparameterM1(argA2) + adultBeta * macroparameterM3(argB2) + adultDelta * macroparameterM4(argA2,argB2)
     s = adultGamma * macroparameterM2(argA2,argB2)
 
-    return -s-p-q + math.sqrt( 4*r*p+(p+q-s)**2 )
+    return -s-p-q + math.sqrt( 4*r*p+(p+q-s)**2 ), p, q, r, s
 
 
 arrayOfAdultA = []
@@ -94,4 +94,4 @@ fitnessArray = []
 for i in range(0,100000):
     fitnessArray.append(fitness(arrayOfJuniorA[i], arrayOfJuniorB[i], arrayOfAdultA[i], arrayOfAdultB[i]))
 
-print(fitnessArray)
+# print(fitnessArray)

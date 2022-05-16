@@ -38,26 +38,33 @@ thirdEpsilon = 0.2
 def foodDistribution(argA, argB, argT):
     return firstSigma * (math.tanh(firstEpsilon * behaviorStrategy(argA, argB, argT)  + minimumDepth) + 1)  # -minimumDepth < arg < 0
 
+
 def predatorDistribution(argA, argB, argT):
     return secondSigma * (math.tanh(secondEpsilon * behaviorStrategy(argA, argB, argT) + minimumDepth) + 1)
+
 
 def predatorActivity(argT):
     return math.cos(2*math.pi*argT) + 1  # 0 < argT < 1
 
+
 def additionalMortality(argA, argB, argT):
     return math.cosh(thirdEpsilon * (behaviorStrategy(argA, argB, argT) + optimumDepth))
+
 
 # Функция стратегии поведения
 def behaviorStrategy(argA, argB, argT):
     return argA + argB * math.cos(2*math.pi*argT)  # 0 < argT < 1
 
+
 # Производная от функции стратегии поведения
 def derivativeBehaviorStrategyInSecondDegree(argA, argB, argT):
     return (-2 * math.pi * argB * math.sin(2*math.pi*argT))**2  # 0 < argT < 1
 
+
 # Комбинированная функция хищника
 def combinedPredatorFunction(argA, argB, argT):
     return predatorActivity(argT) * predatorDistribution(argA, argB, argT)
+
 
 # Функция генерации А(глубина) и В(амплитуда погружения)
 def randomArgs():
@@ -65,18 +72,23 @@ def randomArgs():
     b = random.uniform((-maximumDepth + 1) / 2, -1)
     return a,b
 
+
 # Функции макропараметров
 def macroparameterM1(argA, argB):
     return trapezoidalIntegration(foodDistribution, 0, 1, 0.001, argA, argB)
 
+
 def macroparameterM2(argA, argB):
     return - trapezoidalIntegration(combinedPredatorFunction, 0, 1, 0.001, argA, argB)
+
 
 def macroparameterM3(argA, argB):
     return - trapezoidalIntegration(derivativeBehaviorStrategyInSecondDegree, 0, 1, 0.001, argA, argB)
 
+
 def macroparameterM4(argA, argB):
     return - trapezoidalIntegration(additionalMortality, 0, 1, 0.001, argA, argB)
+
 
 # Функция фитнеса
 def fitness(argA1, argB1, argA2, argB2):
@@ -120,5 +132,5 @@ for i in range(0, len(fitnessArray)):
         trueArrayOfB2.append(arrayOfB1[i])
         trueFitnessArray.append(fitnessArray[i])
 
-for i in range(0, len(trueFitnessArray)):
-    print(trueArrayOfA1[i], trueArrayOfB1[i], trueArrayOfA2[i], trueArrayOfB2[i], trueFitnessArray[i])
+# for i in range(0, len(trueFitnessArray)):
+    # print(trueArrayOfA1[i], trueArrayOfB1[i], trueArrayOfA2[i], trueArrayOfB2[i], trueFitnessArray[i])
